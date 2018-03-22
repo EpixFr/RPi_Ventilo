@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 #Param seuil de décenchement du ventilateur
 seuil_temperature=41 
