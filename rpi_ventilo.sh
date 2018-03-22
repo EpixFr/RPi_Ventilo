@@ -4,7 +4,7 @@
 seuil_temperature=41 
 
 #Recuperation de la temperature du proc
-temperature=`vcgencmd measure_temperature`
+temperature=`vcgencmd measure_temp`
 
 #On retient que la partie entière de l'information
 temperature=${temperature:5:2}
