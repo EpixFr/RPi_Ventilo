@@ -1,7 +1,14 @@
 #!/usr/bin/bash
 
+##### Paramètres #####
+
 #Param seuil de décenchement du ventilateur
-seuil_temperature=41 
+seuil_temperature=53 
+#Broche Gpio
+broche=25
+
+
+##### Programme #####
 
 #Recuperation de la temperature du proc
 temperature=`vcgencmd measure_temp`
@@ -10,7 +17,7 @@ temperature=`vcgencmd measure_temp`
 temperature=${temperature:5:2}
 
 #fichier de valeur de la broche gpio
-fichier="/sys/class/gpio/gpio25/value"
+fichier="/sys/class/gpio/gpio"$broche"/value"
 
 #Test de l'existence du fichier
 if [ ! -f /sys/class/gpio/gpio25/value ]
@@ -28,7 +35,7 @@ then
    # si il est déjà demarré
    if [ $gpio_value == 1 ]
    then
-     echo 0 > /sys/class/gpio/gpio25/value
+     echo 0 > /sys/class/gpio/gpio$broche/value
      echo 25 > /sys/class/gpio/unexport
    fi
 else
@@ -37,8 +44,8 @@ else
   if [ $gpio_value == 0 ]
    then
     echo 25 > /sys/class/gpio/export
-    echo out > /sys/class/gpio/gpio25/direction
-    echo 1 > /sys/class/gpio/gpio25/value
+    echo out > /sys/class/gpio/gpio$broche/direction
+    echo 1 > /sys/class/gpio/gpio$broche/value
   fi  
 fi
 
