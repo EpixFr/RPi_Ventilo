@@ -4,8 +4,12 @@
 
 #Param seuil de décenchement du ventilateur
 seuil_temperature=53 
+
 #Broche Gpio
 broche=25
+
+#Mode log (ok/ko)
+mode_log="ok"
 
 
 ##### Programme #####
@@ -47,6 +51,14 @@ else
     echo out > /sys/class/gpio/gpio$broche/direction
     echo 1 > /sys/class/gpio/gpio$broche/value
   fi  
+fi
+
+#Ecriture du log
+if [ $mode_log == "ok" ]
+then
+  echo "ok"
+  date_log=`date '+%D %X'`
+  echo $date_log" | Temp : "$temperature" | Ventilo : "$gpio_value >> rpi_ventilo.log
 fi
 
 
