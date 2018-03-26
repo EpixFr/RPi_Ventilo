@@ -10,6 +10,7 @@ broche=25
 
 #Mode log (ok/ko)
 mode_log="ok"
+path_log="~/.kodi/userdata/RPiVentilo/"
 
 
 ##### Programme #####
@@ -56,9 +57,8 @@ fi
 #Ecriture du log
 if [ $mode_log == "ok" ]
 then
-  echo "ok"
   date_log=`date '+%D %X'`
-  echo $date_log" | Temp : "$temperature" | Ventilo : "$gpio_value >> rpi_ventilo.log
+  echo $date_log" | Temp : "$temperature" | Ventilo : "$gpio_value >> $path_log"rpi_ventilo.log"
 fi
 
 
