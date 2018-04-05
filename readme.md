@@ -1,7 +1,7 @@
 RPi Ventilo
 ===========
 
-RPi Ventilo est un petit script bash permettant de gérer simplement l'activité de fonctionnement d'un ventilateur branché sur le GPIO d'un Raspberry Pi.
+RPi Ventilo est un petit script bash permettant de gérer simplement l'activité du fonctionnement d'un ventilateur branché sur un port GPIO d'un Raspberry Pi.
 
 
 Fonctionnement
