@@ -10,13 +10,15 @@ broche=25
 
 #Mode log (ok/ko)
 mode_log="ok"
-path_log="~/.kodi/userdata/RPiVentilo/"
+
+#Dossier des logs
+path_log=$(dirname $0)"/log"
 
 
 ##### Programme #####
 
 #Recuperation de la temperature du proc
-temperature=`vcgencmd measure_temp`
+temperature=$(vcgencmd measure_temp)
 
 #On retient que la partie entière de l'information
 temperature=${temperature:5:2}
@@ -25,7 +27,7 @@ temperature=${temperature:5:2}
 fichier="/sys/class/gpio/gpio"$broche"/value"
 
 #Test de l'existence du fichier
-if [ ! -f /sys/class/gpio/gpio25/value ]
+if [ ! -f $fichier ]
 then
   gpio_value=0
 else
@@ -57,9 +59,10 @@ fi
 #Ecriture du log
 if [ $mode_log == "ok" ]
 then
-  date_log=`date '+%D %X'`
-  echo $date_log" | Temp : "$temperature" | Ventilo : "$gpio_value >> $path_log"rpi_ventilo.log"
+  date_log=$(date '+%D %X')
+  echo $date_log" | Temp : "$temperature" | Ventilo : "$gpio_value >> $path_log"/rpi_ventilo.log"
 fi
+
 
 
 
