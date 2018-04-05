@@ -1,9 +1,18 @@
 #!/usr/bin/bash
+#######################################################################
+#
+# RPi Ventilo - By EpxiFr
+#
+# Gestion d'un ventilateur sur Raspberry Pi en distribution LibreElec
+#
+# v1.0 - Avril 2018
+#
+#######################################################################
 
-##### Paramètres #####
+########################   Paramètres   ###############################
 
 #Param seuil de décenchement du ventilateur
-seuil_temperature=53 
+seuil_temperature=55
 
 #Broche Gpio
 broche=25
@@ -14,8 +23,9 @@ mode_log="ok"
 #Dossier des logs
 path_log=$(dirname $0)"/log"
 
+#######################################################################
 
-##### Programme #####
+########################   Programme   ################################
 
 #Recuperation de la temperature du proc
 temperature=$(vcgencmd measure_temp)
@@ -60,7 +70,16 @@ fi
 if [ $mode_log == "ok" ]
 then
   date_log=$(date '+%D %X')
-  echo $date_log" | Temp : "$temperature" | Ventilo : "$gpio_value >> $path_log"/rpi_ventilo.log"
+
+  #Test de l'existence du fichier
+  if [ ! -f $fichier ]
+  then
+    etat_ventilo=0
+  else
+    etat_ventilo=1
+  fi
+
+  echo $date_log" | Temp : "$temperature" | Ventilo : "$etat_ventilo >> $path_log"/rpi_ventilo.log"
 fi
 
 
